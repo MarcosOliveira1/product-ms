@@ -24,19 +24,23 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDTO createProduct(ProductDTO productDTO) {
-        productDTO = ProductDTO.create(productRepository.save(Product.create(productDTO)));
-        return productDTO;
+        try {
+            productDTO = ProductDTO.create(productRepository.save(Product.create(productDTO)));
+            return productDTO;
+        } catch (Exception e){
+            return null;
+        }
     }
 
     @Override
-    public ResponseEntity<?> updateProduct(Long id, ProductDTO productDTO) {
+    public ProductDTO updateProduct(Long id, ProductDTO productDTO) {
         final Optional<Product> optionalProduct = productRepository.findById(id);
 
         if (optionalProduct.isPresent()) {
             optionalProduct.ifPresent(product -> productDTO.setId(product.getId()));
-            return ResponseEntity.ok(productRepository.save(Product.create(productDTO)));
+            return ProductDTO.create(productRepository.save(Product.create(productDTO)));
         }
-        return ResponseEntity.notFound().build();
+        return null;
     }
 
     @Override

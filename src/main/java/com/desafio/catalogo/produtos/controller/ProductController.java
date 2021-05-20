@@ -74,8 +74,13 @@ public class ProductController {
     @ResponseStatus(HttpStatus.OK)
     @PutMapping(value = "/{id}", produces = {"application/json", "application/xml", "application/x-yaml"},
             consumes = {"application/json", "application/xml", "application/x-yaml"})
-    public ResponseEntity<?> update(@PathVariable("id") Long id, @Valid @RequestBody ProductDTO productDTO) {
-        return productService.updateProduct(id, productDTO);
+    public ResponseEntity<ProductDTO> update(@PathVariable("id") Long id, @Valid @RequestBody ProductDTO productDTO) {
+        ProductDTO dto = productService.updateProduct(id, productDTO);
+        if (dto != null){
+            return ResponseEntity.ok(dto);
+        }
+
+        return ResponseEntity.notFound().build();
     }
 
     @ApiOperation(value = "Listar produtos localizado na base de dados filtrado", response = ProductDTO.class)

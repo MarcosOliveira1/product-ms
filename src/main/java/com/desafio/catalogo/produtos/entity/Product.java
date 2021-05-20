@@ -8,6 +8,7 @@ import org.modelmapper.ModelMapper;
 
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
@@ -35,6 +36,7 @@ public class Product implements Serializable {
     @Column(name = "price")
     @NotNull
     @Digits(integer = 20, fraction = 2)
+    @Min(value = 0, message = "preço precisa ser positivo")
     private Double price;
 
     public static Product create(ProductDTO productDTO){

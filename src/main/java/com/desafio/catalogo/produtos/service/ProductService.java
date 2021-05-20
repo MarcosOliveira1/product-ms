@@ -7,7 +7,7 @@ public interface ProductService {
 
     ProductDTO createProduct(ProductDTO productDTO);
 
-    ResponseEntity<?> updateProduct(Long id, ProductDTO productDTO);
+    ProductDTO updateProduct(Long id, ProductDTO productDTO);
 
     ProductDTO findById(Long id);
 
