@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: Catalogo-produtos
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: none
+  datasource:
+    url: jdbc:mysql://localhost:3307/catalogo?useTimezone=true&serverTimezone=UTC
+    username: root
+    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+server:
+  port: 9999
+swagger:
+  infos:
+    title: @project.artifactId@
+    description: @project.description@
+    version: @project.version@
