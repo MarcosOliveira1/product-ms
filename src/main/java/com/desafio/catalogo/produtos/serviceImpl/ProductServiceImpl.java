@@ -34,7 +34,7 @@ public class ProductServiceImpl implements ProductService {
 
         if (optionalProduct.isPresent()) {
             optionalProduct.ifPresent(product -> productDTO.setId(product.getId()));
-            return ResponseEntity.ok(productDTO.create(productRepository.save(Product.create(productDTO))));
+            return ResponseEntity.ok(productRepository.save(Product.create(productDTO)));
         }
         return ResponseEntity.notFound().build();
     }
