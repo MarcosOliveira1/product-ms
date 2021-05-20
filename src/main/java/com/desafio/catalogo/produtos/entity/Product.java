@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "product")
+@Table(name = "product", schema = "API")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

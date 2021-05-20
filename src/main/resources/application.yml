@@ -1,15 +1,37 @@
 spring:
   application:
     name: Catalogo-produtos
-  jpa:
-    show-sql: false
-    hibernate:
-      ddl-auto: none
   datasource:
-    url: jdbc:mysql://localhost:3307/catalogo?useTimezone=true&serverTimezone=UTC
-    username: root
-    password: 1234
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:h2:./data/api;Mode=Oracle;DB_CLOSE_DELAY=-1;AUTO_SERVER=TRUE;DB_CLOSE_ON_EXIT=FALSE;
+    driverClassName: org.h2.Driver
+    username: sa
+    data-password:
+      tomcat:
+        access-to-underlying-connection-allowed: true
+  flyway:
+    enabled: true
+    url: jdbc:h2:./data/api
+    user: sa
+    password:
+    locations: classpath:db/migration
+    schemas: API
+    baseline-on-migrate: true
+    table: FLYWAY_SCHEMA_HISTORY
+    clean-on-validation-error: true
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        default_schema: API
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: true
+
 server:
   port: 9999
 swagger:
